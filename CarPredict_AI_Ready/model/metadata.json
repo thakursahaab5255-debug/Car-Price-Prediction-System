@@ -1,0 +1,497 @@
+{
+  "model_name": "HistGradientBoostingRegressor",
+  "target": "selling_price_lakh",
+  "features": [
+    "brand",
+    "model",
+    "variant",
+    "body_type",
+    "manufacturing_year",
+    "vehicle_age",
+    "registration_year",
+    "kilometers_driven",
+    "fuel_type",
+    "transmission",
+    "engine_cc",
+    "max_power_bhp",
+    "mileage_kmpl",
+    "seats",
+    "ownership",
+    "seller_type",
+    "city",
+    "state",
+    "color",
+    "condition",
+    "insurance_type",
+    "service_history",
+    "accident_history",
+    "warranty_available",
+    "tyre_condition",
+    "features_count"
+  ],
+  "r2": 0.99330361,
+  "accuracy_percent": 99.33,
+  "mae_lakh": 0.45577217,
+  "training_rows": 80000,
+  "test_rows": 20000,
+  "dataset_file": "car_data.csv",
+  "options": {
+    "brand": [
+      "Audi",
+      "BMW",
+      "Honda",
+      "Hyundai",
+      "Jeep",
+      "Kia",
+      "Lexus",
+      "Mahindra",
+      "Maruti Suzuki",
+      "Mercedes-Benz",
+      "MG",
+      "Nissan",
+      "Renault",
+      "Skoda",
+      "Tata",
+      "Toyota",
+      "Volkswagen",
+      "Volvo"
+    ],
+    "model": [
+      "3 Series",
+      "5 Series",
+      "A4",
+      "Alto K10",
+      "Altroz",
+      "Amaze",
+      "Baleno",
+      "Brezza",
+      "C-Class",
+      "Camry",
+      "City",
+      "Compass",
+      "Creta",
+      "E-Class",
+      "Ertiga",
+      "ES",
+      "Fortuner",
+      "Grand i10 Nios",
+      "Harrier",
+      "Hector",
+      "i20",
+      "Innova Crysta",
+      "Ioniq 5",
+      "Kiger",
+      "Kushaq",
+      "Kwid",
+      "Magnite",
+      "Nexon",
+      "Nexon EV",
+      "Punch",
+      "Q3",
+      "Safari",
+      "Scorpio",
+      "Seltos",
+      "Slavia",
+      "Sonet",
+      "Swift",
+      "Taigun",
+      "Thar",
+      "Urban Cruiser Hyryder",
+      "Venue",
+      "Verna",
+      "Virtus",
+      "Wagon R",
+      "X1",
+      "XC40",
+      "XUV700",
+      "ZS EV"
+    ],
+    "variant": [
+      "300h",
+      "320d",
+      "4x4 AT",
+      "520d",
+      "Accomplished",
+      "AX7",
+      "C220d",
+      "Climber",
+      "Delta",
+      "E220d",
+      "Exclusive",
+      "Fearless",
+      "Highline",
+      "HTX",
+      "Hybrid",
+      "Long Range",
+      "LX",
+      "Model S",
+      "Premium Plus",
+      "R-Design",
+      "RXZ",
+      "S11",
+      "sDrive20d",
+      "Sharp",
+      "Sportz",
+      "Style",
+      "SX",
+      "Technology",
+      "V Hybrid",
+      "VX",
+      "VXi",
+      "XV Premium",
+      "XZ",
+      "XZ+",
+      "XZA+",
+      "ZX",
+      "ZXi"
+    ],
+    "body_type": [
+      "Hatchback",
+      "MPV",
+      "Sedan",
+      "SUV"
+    ],
+    "manufacturing_year": [],
+    "vehicle_age": [],
+    "registration_year": [],
+    "kilometers_driven": [],
+    "fuel_type": [
+      "Diesel",
+      "Electric",
+      "Hybrid",
+      "Petrol"
+    ],
+    "transmission": [
+      "Automatic",
+      "Manual"
+    ],
+    "engine_cc": [],
+    "max_power_bhp": [],
+    "mileage_kmpl": [],
+    "seats": [],
+    "ownership": [
+      "1st Owner",
+      "2nd Owner",
+      "3rd Owner",
+      "4th+ Owner"
+    ],
+    "seller_type": [
+      "Certified Dealer",
+      "Dealer",
+      "Individual"
+    ],
+    "city": [
+      "Ahmedabad",
+      "Bengaluru",
+      "Bhopal",
+      "Chandigarh",
+      "Chennai",
+      "Coimbatore",
+      "Delhi",
+      "Gurugram",
+      "Hyderabad",
+      "Indore",
+      "Jaipur",
+      "Kochi",
+      "Kolkata",
+      "Lucknow",
+      "Mumbai",
+      "Nagpur",
+      "Noida",
+      "Patna",
+      "Prayagraj",
+      "Pune",
+      "Surat"
+    ],
+    "state": [
+      "Bihar",
+      "Chandigarh",
+      "Delhi",
+      "Gujarat",
+      "Haryana",
+      "Karnataka",
+      "Kerala",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Rajasthan",
+      "Tamil Nadu",
+      "Telangana",
+      "Uttar Pradesh",
+      "West Bengal"
+    ],
+    "color": [
+      "Beige",
+      "Black",
+      "Blue",
+      "Brown",
+      "Grey",
+      "Red",
+      "Silver",
+      "White"
+    ],
+    "condition": [
+      "Excellent",
+      "Fair",
+      "Good"
+    ],
+    "insurance_type": [
+      "Comprehensive",
+      "Expired",
+      "Third Party"
+    ],
+    "service_history": [
+      "Full Service History",
+      "No Service History",
+      "Partial Service History"
+    ],
+    "accident_history": [
+      "Major",
+      "Minor",
+      "No Record"
+    ],
+    "warranty_available": [
+      "No",
+      "Yes"
+    ],
+    "tyre_condition": [
+      "Excellent",
+      "Good",
+      "Needs Replacement"
+    ],
+    "features_count": []
+  },
+  "brand_to_models": {
+    "Audi": [
+      "A4",
+      "Q3"
+    ],
+    "BMW": [
+      "3 Series",
+      "5 Series",
+      "X1"
+    ],
+    "Honda": [
+      "Amaze",
+      "City"
+    ],
+    "Hyundai": [
+      "Creta",
+      "Grand i10 Nios",
+      "i20",
+      "Ioniq 5",
+      "Venue",
+      "Verna"
+    ],
+    "Jeep": [
+      "Compass"
+    ],
+    "Kia": [
+      "Seltos",
+      "Sonet"
+    ],
+    "Lexus": [
+      "ES"
+    ],
+    "MG": [
+      "Hector",
+      "ZS EV"
+    ],
+    "Mahindra": [
+      "Scorpio",
+      "Thar",
+      "XUV700"
+    ],
+    "Maruti Suzuki": [
+      "Alto K10",
+      "Baleno",
+      "Brezza",
+      "Ertiga",
+      "Swift",
+      "Wagon R"
+    ],
+    "Mercedes-Benz": [
+      "C-Class",
+      "E-Class"
+    ],
+    "Nissan": [
+      "Magnite"
+    ],
+    "Renault": [
+      "Kiger",
+      "Kwid"
+    ],
+    "Skoda": [
+      "Kushaq",
+      "Slavia"
+    ],
+    "Tata": [
+      "Altroz",
+      "Harrier",
+      "Nexon",
+      "Nexon EV",
+      "Punch",
+      "Safari"
+    ],
+    "Toyota": [
+      "Camry",
+      "Fortuner",
+      "Innova Crysta",
+      "Urban Cruiser Hyryder"
+    ],
+    "Volkswagen": [
+      "Taigun",
+      "Virtus"
+    ],
+    "Volvo": [
+      "XC40"
+    ]
+  },
+  "model_to_variants": {
+    "3 Series": [
+      "320d"
+    ],
+    "5 Series": [
+      "520d"
+    ],
+    "A4": [
+      "Premium Plus"
+    ],
+    "Alto K10": [
+      "VXi"
+    ],
+    "Altroz": [
+      "XZ"
+    ],
+    "Amaze": [
+      "VX"
+    ],
+    "Baleno": [
+      "Delta"
+    ],
+    "Brezza": [
+      "ZXi"
+    ],
+    "C-Class": [
+      "C220d"
+    ],
+    "Camry": [
+      "Hybrid"
+    ],
+    "City": [
+      "ZX"
+    ],
+    "Compass": [
+      "Model S"
+    ],
+    "Creta": [
+      "SX"
+    ],
+    "E-Class": [
+      "E220d"
+    ],
+    "ES": [
+      "300h"
+    ],
+    "Ertiga": [
+      "ZXi"
+    ],
+    "Fortuner": [
+      "4x4 AT"
+    ],
+    "Grand i10 Nios": [
+      "Sportz"
+    ],
+    "Harrier": [
+      "XZA+"
+    ],
+    "Hector": [
+      "Sharp"
+    ],
+    "Innova Crysta": [
+      "ZX"
+    ],
+    "Ioniq 5": [
+      "Long Range"
+    ],
+    "Kiger": [
+      "RXZ"
+    ],
+    "Kushaq": [
+      "Style"
+    ],
+    "Kwid": [
+      "Climber"
+    ],
+    "Magnite": [
+      "XV Premium"
+    ],
+    "Nexon": [
+      "XZ+"
+    ],
+    "Nexon EV": [
+      "Fearless"
+    ],
+    "Punch": [
+      "Accomplished"
+    ],
+    "Q3": [
+      "Technology"
+    ],
+    "Safari": [
+      "XZA+"
+    ],
+    "Scorpio": [
+      "S11"
+    ],
+    "Seltos": [
+      "HTX"
+    ],
+    "Slavia": [
+      "Style"
+    ],
+    "Sonet": [
+      "HTX"
+    ],
+    "Swift": [
+      "VXi",
+      "ZXi"
+    ],
+    "Taigun": [
+      "Highline"
+    ],
+    "Thar": [
+      "LX"
+    ],
+    "Urban Cruiser Hyryder": [
+      "V Hybrid"
+    ],
+    "Venue": [
+      "SX"
+    ],
+    "Verna": [
+      "SX"
+    ],
+    "Virtus": [
+      "Highline"
+    ],
+    "Wagon R": [
+      "VXi"
+    ],
+    "X1": [
+      "sDrive20d"
+    ],
+    "XC40": [
+      "R-Design"
+    ],
+    "XUV700": [
+      "AX7"
+    ],
+    "ZS EV": [
+      "Exclusive"
+    ],
+    "i20": [
+      "Sportz"
+    ]
+  },
+  "created_at": "2026-08-29 17:02:27"
+}

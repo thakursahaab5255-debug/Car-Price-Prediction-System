@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | CarPredict AI</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Inter", sans-serif;
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(0, 140, 255, 0.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(0, 255, 200, 0.10),
+                    transparent 35%
+                ),
+                #07111f;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .brand-logo {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 22px;
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #0072ff
+                );
+
+            box-shadow:
+                0 10px 35px rgba(
+                    0,
+                    140,
+                    255,
+                    0.35
+                );
+        }
+
+        .brand-name {
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .brand-name span {
+            color: #00c6ff;
+        }
+
+        .brand-subtitle {
+            margin-top: 6px;
+
+            color: #8fa3b8;
+
+            font-size: 13px;
+        }
+
+        .login-card {
+            background: rgba(
+                13,
+                27,
+                45,
+                0.92
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.08
+            );
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 25px 70px rgba(
+                    0,
+                    0,
+                    0,
+                    0.45
+                );
+
+            backdrop-filter: blur(15px);
+        }
+
+        .login-title {
+            font-size: 25px;
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        .login-description {
+            color: #8fa3b8;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #dbe7f3;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 11px;
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.10
+            );
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.045
+            );
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #00aaff;
+
+            background: rgba(
+                0,
+                170,
+                255,
+                0.06
+            );
+
+            box-shadow:
+                0 0 0 3px rgba(
+                    0,
+                    170,
+                    255,
+                    0.10
+                );
+        }
+
+        input::placeholder {
+            color: #63778c;
+        }
+
+        .login-button {
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #0072ff
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            margin-top: 5px;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(
+                    0,
+                    140,
+                    255,
+                    0.30
+                );
+        }
+
+        .message {
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+
+            text-align: center;
+        }
+
+        .message.error {
+            background: rgba(
+                255,
+                70,
+                70,
+                0.10
+            );
+
+            border: 1px solid rgba(
+                255,
+                70,
+                70,
+                0.25
+            );
+
+            color: #ff8c8c;
+        }
+
+        .message.success {
+            background: rgba(
+                0,
+                220,
+                150,
+                0.10
+            );
+
+            border: 1px solid rgba(
+                0,
+                220,
+                150,
+                0.25
+            );
+
+            color: #6ff0c0;
+        }
+
+        .register-link {
+            text-align: center;
+
+            margin-top: 24px;
+
+            color: #8fa3b8;
+
+            font-size: 13px;
+        }
+
+        .register-link a {
+            color: #00b7ff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #5f7387;
+
+            font-size: 11px;
+        }
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .brand-name {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="login-container">
+
+        <!-- BRAND -->
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                CP
+            </div>
+
+            <div class="brand-name">
+                CarPredict <span>AI</span>
+            </div>
+
+            <div class="brand-subtitle">
+                Smart Used Car Valuation
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN CARD -->
+
+        <div class="login-card">
+
+            <h1 class="login-title">
+                Welcome Back
+            </h1>
+
+            <p class="login-description">
+                Login to access your CarPredict AI
+                valuation dashboard.
+            </p>
+
+
+            <!-- FLASH MESSAGES -->
+
+            {% with messages = get_flashed_messages(
+                with_categories=true
+            ) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div
+                            class="message {{ category }}"
+                        >
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                method="POST"
+                action="{{ url_for('login') }}"
+            >
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Login to CarPredict AI
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="{{ url_for('register') }}">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="security-note">
+            🔒 Your password is securely hashed and protected.
+        </div>
+
+    </div>
+
+</body>
+
+</html>

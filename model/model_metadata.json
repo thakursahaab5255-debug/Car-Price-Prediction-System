@@ -1,0 +1,478 @@
+{
+    "project_name": "CarPredict AI",
+    "project_description": "AI powered Indian used car price prediction system",
+    "dataset_rows": 100000,
+    "dataset_columns": 34,
+    "target_column": "selling_price_lakh",
+    "feature_columns": [
+        "brand",
+        "model",
+        "variant",
+        "body_type",
+        "manufacturing_year",
+        "registration_year",
+        "kilometers_driven",
+        "fuel_type",
+        "transmission",
+        "engine_cc",
+        "max_power_bhp",
+        "mileage_kmpl",
+        "seats",
+        "ownership",
+        "seller_type",
+        "city",
+        "state",
+        "color",
+        "condition",
+        "insurance_type",
+        "service_history",
+        "accident_history",
+        "warranty_available",
+        "tyre_condition",
+        "features_count"
+    ],
+    "categorical_columns": [
+        "brand",
+        "model",
+        "variant",
+        "body_type",
+        "fuel_type",
+        "transmission",
+        "ownership",
+        "seller_type",
+        "city",
+        "state",
+        "color",
+        "condition",
+        "insurance_type",
+        "service_history",
+        "accident_history",
+        "warranty_available",
+        "tyre_condition"
+    ],
+    "numerical_columns": [
+        "manufacturing_year",
+        "registration_year",
+        "kilometers_driven",
+        "engine_cc",
+        "max_power_bhp",
+        "mileage_kmpl",
+        "seats",
+        "features_count"
+    ],
+    "model_type": "CatBoostRegressor",
+    "best_iteration": 973,
+    "metrics": {
+        "r2_score": 0.9938959853754645,
+        "r2_percentage": 99.38959853754645,
+        "mae_lakh": 0.43406487518062076,
+        "rmse_lakh": 0.7527871819562221,
+        "mape_percentage": 4.673972499114063,
+        "quality": "Excellent"
+    },
+    "dropdown_options": {
+        "brand": [
+            "Audi",
+            "BMW",
+            "Honda",
+            "Hyundai",
+            "Jeep",
+            "Kia",
+            "Lexus",
+            "MG",
+            "Mahindra",
+            "Maruti Suzuki",
+            "Mercedes-Benz",
+            "Nissan",
+            "Renault",
+            "Skoda",
+            "Tata",
+            "Toyota",
+            "Volkswagen",
+            "Volvo"
+        ],
+        "body_type": [
+            "Hatchback",
+            "MPV",
+            "SUV",
+            "Sedan"
+        ],
+        "fuel_type": [
+            "Diesel",
+            "Electric",
+            "Hybrid",
+            "Petrol"
+        ],
+        "transmission": [
+            "Automatic",
+            "Manual"
+        ],
+        "ownership": [
+            "1st Owner",
+            "2nd Owner",
+            "3rd Owner",
+            "4th+ Owner"
+        ],
+        "seller_type": [
+            "Certified Dealer",
+            "Dealer",
+            "Individual"
+        ],
+        "city": [
+            "Ahmedabad",
+            "Bengaluru",
+            "Bhopal",
+            "Chandigarh",
+            "Chennai",
+            "Coimbatore",
+            "Delhi",
+            "Gurugram",
+            "Hyderabad",
+            "Indore",
+            "Jaipur",
+            "Kochi",
+            "Kolkata",
+            "Lucknow",
+            "Mumbai",
+            "Nagpur",
+            "Noida",
+            "Patna",
+            "Prayagraj",
+            "Pune",
+            "Surat"
+        ],
+        "state": [
+            "Bihar",
+            "Chandigarh",
+            "Delhi",
+            "Gujarat",
+            "Haryana",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Rajasthan",
+            "Tamil Nadu",
+            "Telangana",
+            "Uttar Pradesh",
+            "West Bengal"
+        ],
+        "color": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Grey",
+            "Red",
+            "Silver",
+            "White"
+        ],
+        "condition": [
+            "Excellent",
+            "Fair",
+            "Good"
+        ],
+        "insurance_type": [
+            "Comprehensive",
+            "Expired",
+            "Third Party"
+        ],
+        "service_history": [
+            "Full Service History",
+            "No Service History",
+            "Partial Service History"
+        ],
+        "accident_history": [
+            "Major",
+            "Minor",
+            "Unknown"
+        ],
+        "warranty_available": [
+            "No",
+            "Yes"
+        ],
+        "tyre_condition": [
+            "Excellent",
+            "Good",
+            "Needs Replacement"
+        ],
+        "manufacturing_year": [
+            2025,
+            2024,
+            2023,
+            2022,
+            2021,
+            2020,
+            2019,
+            2018,
+            2017,
+            2016,
+            2015,
+            2014,
+            2013,
+            2012
+        ],
+        "registration_year": [
+            2025,
+            2024,
+            2023,
+            2022,
+            2021,
+            2020,
+            2019,
+            2018,
+            2017,
+            2016,
+            2015,
+            2014,
+            2013,
+            2012
+        ],
+        "seats": [
+            4,
+            5,
+            6,
+            7
+        ]
+    },
+    "vehicle_hierarchy": {
+        "Audi": {
+            "A4": [
+                "Premium Plus"
+            ],
+            "Q3": [
+                "Technology"
+            ]
+        },
+        "BMW": {
+            "3 Series": [
+                "320d"
+            ],
+            "5 Series": [
+                "520d"
+            ],
+            "X1": [
+                "sDrive20d"
+            ]
+        },
+        "Honda": {
+            "Amaze": [
+                "VX"
+            ],
+            "City": [
+                "ZX"
+            ]
+        },
+        "Hyundai": {
+            "Creta": [
+                "SX"
+            ],
+            "Grand i10 Nios": [
+                "Sportz"
+            ],
+            "Ioniq 5": [
+                "Long Range"
+            ],
+            "Venue": [
+                "SX"
+            ],
+            "Verna": [
+                "SX"
+            ],
+            "i20": [
+                "Sportz"
+            ]
+        },
+        "Jeep": {
+            "Compass": [
+                "Model S"
+            ]
+        },
+        "Kia": {
+            "Seltos": [
+                "HTX"
+            ],
+            "Sonet": [
+                "HTX"
+            ]
+        },
+        "Lexus": {
+            "ES": [
+                "300h"
+            ]
+        },
+        "MG": {
+            "Hector": [
+                "Sharp"
+            ],
+            "ZS EV": [
+                "Exclusive"
+            ]
+        },
+        "Mahindra": {
+            "Scorpio": [
+                "S11"
+            ],
+            "Thar": [
+                "LX"
+            ],
+            "XUV700": [
+                "AX7"
+            ]
+        },
+        "Maruti Suzuki": {
+            "Alto K10": [
+                "VXi"
+            ],
+            "Baleno": [
+                "Delta"
+            ],
+            "Brezza": [
+                "ZXi"
+            ],
+            "Ertiga": [
+                "ZXi"
+            ],
+            "Swift": [
+                "VXi",
+                "ZXi"
+            ],
+            "Wagon R": [
+                "VXi"
+            ]
+        },
+        "Mercedes-Benz": {
+            "C-Class": [
+                "C220d"
+            ],
+            "E-Class": [
+                "E220d"
+            ]
+        },
+        "Nissan": {
+            "Magnite": [
+                "XV Premium"
+            ]
+        },
+        "Renault": {
+            "Kiger": [
+                "RXZ"
+            ],
+            "Kwid": [
+                "Climber"
+            ]
+        },
+        "Skoda": {
+            "Kushaq": [
+                "Style"
+            ],
+            "Slavia": [
+                "Style"
+            ]
+        },
+        "Tata": {
+            "Altroz": [
+                "XZ"
+            ],
+            "Harrier": [
+                "XZA+"
+            ],
+            "Nexon": [
+                "XZ+"
+            ],
+            "Nexon EV": [
+                "Fearless"
+            ],
+            "Punch": [
+                "Accomplished"
+            ],
+            "Safari": [
+                "XZA+"
+            ]
+        },
+        "Toyota": {
+            "Camry": [
+                "Hybrid"
+            ],
+            "Fortuner": [
+                "4x4 AT"
+            ],
+            "Innova Crysta": [
+                "ZX"
+            ],
+            "Urban Cruiser Hyryder": [
+                "V Hybrid"
+            ]
+        },
+        "Volkswagen": {
+            "Taigun": [
+                "Highline"
+            ],
+            "Virtus": [
+                "Highline"
+            ]
+        },
+        "Volvo": {
+            "XC40": [
+                "R-Design"
+            ]
+        }
+    },
+    "numeric_ranges": {
+        "manufacturing_year": {
+            "min": 2012.0,
+            "max": 2025.0,
+            "median": 2019.0,
+            "mean": 2018.51507
+        },
+        "registration_year": {
+            "min": 2012.0,
+            "max": 2025.0,
+            "median": 2019.0,
+            "mean": 2018.51507
+        },
+        "kilometers_driven": {
+            "min": 1500.0,
+            "max": 220000.0,
+            "median": 71056.5,
+            "mean": 78580.02882
+        },
+        "engine_cc": {
+            "min": 40.5,
+            "max": 2755.0,
+            "median": 1462.0,
+            "mean": 1462.084745
+        },
+        "max_power_bhp": {
+            "min": 66.0,
+            "max": 217.0,
+            "median": 118.0,
+            "mean": 130.35126
+        },
+        "mileage_kmpl": {
+            "min": 0.0,
+            "max": 27.9,
+            "median": 18.0,
+            "mean": 17.4704
+        },
+        "seats": {
+            "min": 4.0,
+            "max": 7.0,
+            "median": 5.0,
+            "mean": 5.22772
+        },
+        "features_count": {
+            "min": 3.0,
+            "max": 20.0,
+            "median": 10.0,
+            "mean": 10.17959
+        }
+    },
+    "price_statistics": {
+        "minimum_lakh": 0.55,
+        "maximum_lakh": 81.6,
+        "average_lakh": 9.582580700000001,
+        "median_lakh": 6.39
+    },
+    "random_seed": 42
+}

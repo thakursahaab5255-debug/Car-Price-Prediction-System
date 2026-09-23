@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login | CarPredict AI</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(124, 58, 237, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(0, 212, 255, 0.12),
+                    transparent 35%
+                ),
+                #070b14;
+
+            color: white;
+        }
+
+        .admin-card {
+
+            width: 100%;
+            max-width: 430px;
+
+            padding: 42px;
+
+            background: rgba(15, 23, 42, 0.92);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 80px rgba(0,0,0,0.45);
+        }
+
+        .admin-icon {
+
+            width: 64px;
+            height: 64px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #00d4ff
+                );
+
+            font-size: 28px;
+        }
+
+        h1 {
+
+            text-align: center;
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+        }
+
+        .message {
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            border-radius: 10px;
+
+            background: rgba(239,68,68,0.12);
+
+            border: 1px solid rgba(239,68,68,0.25);
+
+            color: #fca5a5;
+
+            font-size: 13px;
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border-radius: 11px;
+
+            border: 1px solid rgba(148,163,184,0.18);
+
+            background: rgba(2,6,23,0.7);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        input:focus {
+
+            border-color: #7c3aed;
+
+            box-shadow:
+                0 0 0 3px rgba(124,58,237,0.12);
+        }
+
+        button {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #00b8db
+                );
+
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+
+            transform: translateY(-2px);
+        }
+
+        .back {
+
+            display: block;
+
+            margin-top: 22px;
+
+            text-align: center;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+        .back:hover {
+
+            color: #00d4ff;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="admin-card">
+
+        <div class="admin-icon">
+            🔐
+        </div>
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p class="subtitle">
+            CarPredict AI Administration Panel
+        </p>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="message">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <form
+            method="POST"
+            action="{{ url_for('admin_login') }}"
+        >
+
+            <div class="form-group">
+
+                <label for="username">
+                    Admin Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter admin username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Admin Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit">
+                Enter Admin Dashboard
+            </button>
+
+        </form>
+
+
+        <a
+            href="{{ url_for('login') }}"
+            class="back"
+        >
+            ← Back to User Login
+        </a>
+
+    </div>
+
+</body>
+
+</html>

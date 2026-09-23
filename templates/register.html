@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account | CarPredict AI</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            font-family: "Inter", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0, 212, 255, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(124, 58, 237, 0.14),
+                    transparent 35%
+                ),
+                #070b14;
+
+            color: #ffffff;
+        }
+
+        .container {
+
+            width: 100%;
+            max-width: 460px;
+
+            padding: 42px 38px;
+
+            background: rgba(15, 23, 42, 0.88);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d4ff,
+                    #7c3aed
+                );
+
+            font-size: 25px;
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 35px rgba(0, 212, 255, 0.22);
+        }
+
+        h1 {
+
+            text-align: center;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        .message {
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .message.error {
+
+            background: rgba(239, 68, 68, 0.12);
+
+            border: 1px solid rgba(239, 68, 68, 0.3);
+
+            color: #fca5a5;
+        }
+
+        .message.success {
+
+            background: rgba(34, 197, 94, 0.12);
+
+            border: 1px solid rgba(34, 197, 94, 0.3);
+
+            color: #86efac;
+        }
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #cbd5e1;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(148, 163, 184, 0.18);
+
+            outline: none;
+
+            background: rgba(2, 6, 23, 0.65);
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        input::placeholder {
+
+            color: #64748b;
+        }
+
+        input:focus {
+
+            border-color: #00d4ff;
+
+            box-shadow:
+                0 0 0 3px rgba(0, 212, 255, 0.10);
+        }
+
+        .password-info {
+
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            color: #64748b;
+        }
+
+        button {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            margin-top: 5px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            color: #ffffff;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00b8db,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 10px 25px rgba(0, 212, 255, 0.15);
+
+            transition: 0.25s ease;
+        }
+
+        button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 32px rgba(0, 212, 255, 0.22);
+        }
+
+        .bottom-text {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            font-size: 13px;
+
+            color: #64748b;
+        }
+
+        .bottom-text a {
+
+            color: #00d4ff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        .bottom-text a:hover {
+
+            text-decoration: underline;
+        }
+
+        .security {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 22px;
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+
+                padding: 32px 24px;
+
+                border-radius: 20px;
+            }
+
+            h1 {
+
+                font-size: 24px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            CP
+        </div>
+
+        <h1>
+            Create Account
+        </h1>
+
+        <p class="subtitle">
+            Create your CarPredict AI account
+            and start predicting car prices.
+        </p>
+
+
+        <!-- Flash Messages -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="message {{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- Registration Form -->
+
+        <form
+            method="POST"
+            action="{{ url_for('register') }}"
+        >
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+                <div class="password-info">
+                    Password must contain at least 6 characters.
+                </div>
+
+            </div>
+
+
+            <button type="submit">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <div class="bottom-text">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </div>
+
+
+        <div class="security">
+
+            🔒 Your password is securely hashed
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

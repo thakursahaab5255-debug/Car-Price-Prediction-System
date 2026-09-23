@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="CarPredict AI - Smart Used Car Valuation System"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <title>
+        CarPredict AI | Smart Car Valuation
+    </title>
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+
+<!-- ========================================================
+     PAGE LOADER
+========================================================= -->
+
+<div
+    id="pageLoader"
+    class="page-loader"
+>
+
+    <div class="loader-ring"></div>
+
+    <p>
+        Loading CarPredict AI...
+    </p>
+
+</div>
+
+
+<!-- ========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <!-- BRAND -->
+
+        <a
+            href="#home"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+                CP
+            </div>
+
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    CarPredict <span>AI</span>
+                </div>
+
+                <div class="brand-tagline">
+                    Smart Car Valuation
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <!-- DESKTOP NAVIGATION -->
+
+        <nav class="desktop-nav">
+
+            <a
+                href="#home"
+                class="nav-link active"
+            >
+                Home
+            </a>
+
+            <a
+                href="#predict"
+                class="nav-link"
+            >
+                Predict
+            </a>
+
+            <a
+                href="#how-it-works"
+                class="nav-link"
+            >
+                How It Works
+            </a>
+
+            <a
+                href="#about"
+                class="nav-link"
+            >
+                About
+            </a>
+
+        </nav>
+
+
+        <!-- NAV RIGHT -->
+
+<div class="nav-right">
+
+    <!-- LOGGED-IN USER -->
+
+    <div class="user-menu">
+
+        <div class="user-avatar">
+            {{ session["username"][0]|upper }}
+        </div>
+
+        <div class="user-info">
+
+            <span class="user-welcome">
+                Welcome
+            </span>
+
+            <strong>
+                {{ session["username"] }}
+            </strong>
+
+        </div>
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout-button"
+        >
+            Logout
+        </a>
+
+    </div>
+
+
+    <!-- MODEL STATUS -->
+
+    <div
+        id="modelStatus"
+        class="model-status"
+    >
+
+        <span class="status-dot"></span>
+
+        <span id="modelStatusText">
+            AI Model Online
+        </span>
+
+    </div>
+
+
+    <!-- THEME TOGGLE -->
+
+    <button
+        id="themeToggle"
+        class="theme-toggle"
+        type="button"
+        aria-label="Toggle dark mode"
+    >
+
+        <span id="themeIcon">
+            ☾
+        </span>
+
+    </button>
+
+
+    <!-- MOBILE MENU -->
+
+    <button
+        id="mobileMenuButton"
+        class="mobile-menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+    >
+        ☰
+    </button>
+
+</div>
+
+    </div>
+
+
+    <!-- MOBILE NAV -->
+
+    <div
+        id="mobileNav"
+        class="mobile-nav"
+    >
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#predict">
+            Predict
+        </a>
+
+        <a href="#how-it-works">
+            How It Works
+        </a>
+
+        <a href="#about">
+            About
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ========================================================
+     MAIN
+========================================================= -->
+
+<main id="home">
+
+
+    <!-- ====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="hero-section">
+
+        <div class="hero-background"></div>
+
+        <div class="hero-container">
+
+
+            <!-- HERO LEFT -->
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    <span>✦</span>
+                    AI POWERED VALUATION
+                </div>
+
+
+                <h1>
+
+                    Know Your Car's
+
+                    <span>
+                        True Value
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Get an intelligent estimate of your car's
+                    market value using machine learning and
+                    real Indian used-car market data.
+
+                </p>
+
+
+                <!-- FEATURES -->
+
+                <div class="hero-features">
+
+                    <div class="hero-feature">
+
+                        <div class="feature-icon">
+                            ✦
+                        </div>
+
+                        <span>
+                            AI Powered
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-feature">
+
+                        <div class="feature-icon">
+                            ◈
+                        </div>
+
+                        <span>
+                            Real Market Data
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-feature">
+
+                        <div class="feature-icon">
+                            ◷
+                        </div>
+
+                        <span>
+                            Instant Results
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO RIGHT -->
+
+            <div class="hero-visual">
+
+                <div class="hero-glow"></div>
+
+
+                <!-- CAR PLACEHOLDER -->
+
+                <div class="car-visual">
+
+                    <div class="car-shadow"></div>
+
+                    <div class="car-icon-large">
+                        🚘
+                    </div>
+
+                    <div class="car-visual-text">
+                        AI Car Valuation
+                    </div>
+
+                </div>
+
+
+                <!-- ACCURACY CARD -->
+
+                <div class="accuracy-card">
+
+                    <span>
+                        Model R² Score
+                    </span>
+
+                    <strong id="heroAccuracy">
+                        99.39%
+                    </strong>
+
+                    <small>
+                        Excellent
+                    </small>
+
+                </div>
+
+
+                <!-- RESULT CARD -->
+
+                <div class="instant-card">
+
+                    <div class="instant-icon">
+                        ⚡
+                    </div>
+
+                    <div>
+
+                        <small>
+                            Smart Valuation
+                        </small>
+
+                        <strong>
+                            Instant Result
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         PREDICTION AREA
+    ===================================================== -->
+
+    <section
+        id="predict"
+        class="prediction-section"
+    >
+
+        <div class="prediction-container">
+
+
+            <!-- =================================================
+                 FORM CARD
+            ================================================== -->
+
+            <div class="form-card">
+
+                <!-- FORM HEADER -->
+
+                <div class="card-header">
+
+                    <div class="header-icon">
+                        🚘
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Enter Car Details
+                        </h2>
+
+                        <p>
+                            Fill in the details you know.
+                            All fields are optional.
+                        </p>
+
+                    </div>
+
+
+                    <div class="optional-badge">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        Optional Fields
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     FORM
+                ================================================== -->
+
+                <form
+                    id="predictionForm"
+                    autocomplete="off"
+                >
+
+
+                    <!-- =============================================
+                         BASIC INFORMATION
+                    ============================================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-title">
+
+                            <span class="section-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Basic Information
+                                </h3>
+
+                                <p>
+                                    Select the vehicle from the
+                                    available dataset.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- BRAND -->
+
+                            <div class="form-group">
+
+                                <label for="brand">
+                                    Car Company
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="brand"
+                                        name="brand"
+                                    >
+
+                                        <option value="">
+                                            Select Company
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- MODEL -->
+
+                            <div class="form-group">
+
+                                <label for="model">
+                                    Model
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="model"
+                                        name="model"
+                                        disabled
+                                    >
+
+                                        <option value="">
+                                            Select Model
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    id="modelHint"
+                                    class="field-hint"
+                                >
+                                    Select company first
+                                </div>
+
+                            </div>
+
+
+                            <!-- VARIANT -->
+
+                            <div class="form-group">
+
+                                <label for="variant">
+                                    Variant
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="variant"
+                                        name="variant"
+                                        disabled
+                                    >
+
+                                        <option value="">
+                                            Select Variant
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                                <div
+                                    id="variantHint"
+                                    class="field-hint"
+                                >
+                                    Select model first
+                                </div>
+
+                            </div>
+
+
+                            <!-- BODY TYPE -->
+
+                            <div class="form-group">
+
+                                <label for="body_type">
+                                    Body Type
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="body_type"
+                                        name="body_type"
+                                    >
+
+                                        <option value="">
+                                            Select Body Type
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- MANUFACTURING YEAR -->
+
+                            <div class="form-group">
+
+                                <label for="manufacturing_year">
+                                    Manufacturing Year
+                                </label>
+
+                                <input
+                                    id="manufacturing_year"
+                                    name="manufacturing_year"
+                                    type="number"
+                                    placeholder="e.g. 2022"
+                                    min="1900"
+                                    max="2035"
+                                >
+
+                            </div>
+
+
+                            <!-- REGISTRATION YEAR -->
+
+                            <div class="form-group">
+
+                                <label for="registration_year">
+                                    Registration Year
+                                </label>
+
+                                <input
+                                    id="registration_year"
+                                    name="registration_year"
+                                    type="number"
+                                    placeholder="e.g. 2022"
+                                    min="1900"
+                                    max="2035"
+                                >
+
+                            </div>
+
+
+                            <!-- FUEL -->
+
+                            <div class="form-group">
+
+                                <label for="fuel_type">
+                                    Fuel Type
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="fuel_type"
+                                        name="fuel_type"
+                                    >
+
+                                        <option value="">
+                                            Select Fuel Type
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TRANSMISSION -->
+
+                            <div class="form-group">
+
+                                <label for="transmission">
+                                    Transmission
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="transmission"
+                                        name="transmission"
+                                    >
+
+                                        <option value="">
+                                            Select Transmission
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- COLOR -->
+
+                            <div class="form-group">
+
+                                <label for="color">
+                                    Color
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="color"
+                                        name="color"
+                                    >
+
+                                        <option value="">
+                                            Select Color
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- KILOMETERS -->
+
+                            <div class="form-group">
+
+                                <label for="kilometers_driven">
+                                    Kilometers Driven
+                                </label>
+
+                                <input
+                                    id="kilometers_driven"
+                                    name="kilometers_driven"
+                                    type="number"
+                                    placeholder="e.g. 45000"
+                                    min="0"
+                                    step="1"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         ENGINE & PERFORMANCE
+                    ============================================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-title">
+
+                            <span class="section-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Engine & Performance
+                                </h3>
+
+                                <p>
+                                    Optional technical specifications.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- ENGINE CC -->
+
+                            <div class="form-group">
+
+                                <label for="engine_cc">
+                                    Engine Capacity
+                                    <span>
+                                        (cc)
+                                    </span>
+                                </label>
+
+                                <input
+                                    id="engine_cc"
+                                    name="engine_cc"
+                                    type="number"
+                                    placeholder="e.g. 1497"
+                                    min="0"
+                                    step="1"
+                                >
+
+                            </div>
+
+
+                            <!-- POWER -->
+
+                            <div class="form-group">
+
+                                <label for="max_power_bhp">
+                                    Maximum Power
+                                    <span>
+                                        (BHP)
+                                    </span>
+                                </label>
+
+                                <input
+                                    id="max_power_bhp"
+                                    name="max_power_bhp"
+                                    type="number"
+                                    placeholder="e.g. 113"
+                                    min="0"
+                                    step="0.1"
+                                >
+
+                            </div>
+
+
+                            <!-- MILEAGE -->
+
+                            <div class="form-group">
+
+                                <label for="mileage_kmpl">
+                                    Mileage
+                                    <span>
+                                        (km/l)
+                                    </span>
+                                </label>
+
+                                <input
+                                    id="mileage_kmpl"
+                                    name="mileage_kmpl"
+                                    type="number"
+                                    placeholder="e.g. 18.5"
+                                    min="0"
+                                    step="0.1"
+                                >
+
+                            </div>
+
+
+                            <!-- SEATS -->
+
+                            <div class="form-group">
+
+                                <label for="seats">
+                                    Seating Capacity
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="seats"
+                                        name="seats"
+                                    >
+
+                                        <option value="">
+                                            Select Seats
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         OWNERSHIP & HISTORY
+                    ============================================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-title">
+
+                            <span class="section-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Ownership & History
+                                </h3>
+
+                                <p>
+                                    Help the model understand vehicle
+                                    condition and ownership.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- OWNERSHIP -->
+
+                            <div class="form-group">
+
+                                <label for="ownership">
+                                    Owners
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="ownership"
+                                        name="ownership"
+                                    >
+
+                                        <option value="">
+                                            Select Owners
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CONDITION -->
+
+                            <div class="form-group">
+
+                                <label for="condition">
+                                    Vehicle Condition
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="condition"
+                                        name="condition"
+                                    >
+
+                                        <option value="">
+                                            Select Condition
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- SELLER TYPE -->
+
+                            <div class="form-group">
+
+                                <label for="seller_type">
+                                    Seller Type
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="seller_type"
+                                        name="seller_type"
+                                    >
+
+                                        <option value="">
+                                            Select Seller Type
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- SERVICE HISTORY -->
+
+                            <div class="form-group">
+
+                                <label for="service_history">
+                                    Service History
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="service_history"
+                                        name="service_history"
+                                    >
+
+                                        <option value="">
+                                            Select Service History
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ACCIDENT HISTORY -->
+
+                            <div class="form-group">
+
+                                <label for="accident_history">
+                                    Accident History
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="accident_history"
+                                        name="accident_history"
+                                    >
+
+                                        <option value="">
+                                            Select Accident History
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- WARRANTY -->
+
+                            <div class="form-group">
+
+                                <label for="warranty_available">
+                                    Warranty Available
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="warranty_available"
+                                        name="warranty_available"
+                                    >
+
+                                        <option value="">
+                                            Select Warranty
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- TYRE CONDITION -->
+
+                            <div class="form-group">
+
+                                <label for="tyre_condition">
+                                    Tyre Condition
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="tyre_condition"
+                                        name="tyre_condition"
+                                    >
+
+                                        <option value="">
+                                            Select Tyre Condition
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- INSURANCE -->
+
+                            <div class="form-group">
+
+                                <label for="insurance_type">
+                                    Insurance Type
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="insurance_type"
+                                        name="insurance_type"
+                                    >
+
+                                        <option value="">
+                                            Select Insurance
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         LOCATION
+                    ============================================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-title">
+
+                            <span class="section-number">
+                                04
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Location
+                                </h3>
+
+                                <p>
+                                    Market location can influence
+                                    used-car prices.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- STATE -->
+
+                            <div class="form-group">
+
+                                <label for="state">
+                                    State
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="state"
+                                        name="state"
+                                    >
+
+                                        <option value="">
+                                            Select State
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CITY -->
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <div class="select-wrapper">
+
+                                    <select
+                                        id="city"
+                                        name="city"
+                                    >
+
+                                        <option value="">
+                                            Select City
+                                        </option>
+
+                                    </select>
+
+                                    <span class="select-arrow">
+                                       ⌄
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FEATURES COUNT -->
+
+                            <div class="form-group">
+
+                                <label for="features_count">
+                                    Features Count
+                                </label>
+
+                                <input
+                                    id="features_count"
+                                    name="features_count"
+                                    type="number"
+                                    placeholder="e.g. 12"
+                                    min="0"
+                                    step="1"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         PREDICT BUTTON
+                    ============================================== -->
+
+                    <div class="form-actions">
+
+                        <button
+                            id="predictButton"
+                            class="predict-button"
+                            type="submit"
+                        >
+
+                            <span class="button-icon">
+                                ✨
+                            </span>
+
+                            <span
+                                id="predictButtonText"
+                            >
+                                Predict Car Price
+                            </span>
+
+                            <span
+                                id="predictSpinner"
+                                class="button-spinner"
+                            ></span>
+
+                        </button>
+
+
+                        <p class="privacy-note">
+
+                            <span>
+                                🔒
+                            </span>
+
+                            Your data is processed locally by
+                            the prediction system.
+
+                        </p>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- =================================================
+                 RESULT CARD
+            ================================================== -->
+
+            <aside
+                id="resultCard"
+                class="result-card"
+            >
+
+                <!-- RESULT HEADER -->
+
+                <div class="result-header">
+
+                    <div class="header-icon result-header-icon">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            AI Valuation Result
+                        </h2>
+
+                        <p>
+                            Estimated Market Price
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="predictionStatus"
+                        class="prediction-status"
+                    >
+
+                        <span>
+                            ✓
+                        </span>
+
+                        <span>
+                            Ready
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMPTY RESULT -->
+
+                <div
+                    id="emptyResult"
+                    class="empty-result"
+                >
+
+                    <div class="empty-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Your valuation will appear here
+                    </h3>
+
+                    <p>
+                        Select your car details and click
+                        <strong>
+                            Predict Car Price
+                        </strong>
+                        to get an AI-powered estimate.
+                    </p>
+
+                </div>
+
+
+                <!-- RESULT CONTENT -->
+
+                <div
+                    id="resultContent"
+                    class="result-content hidden"
+                >
+
+
+                    <!-- MAIN PRICE -->
+
+                    <div class="price-block">
+
+                        <div class="price-label">
+                            Estimated Market Price
+                        </div>
+
+                        <div
+                            id="predictedPrice"
+                            class="predicted-price"
+                        >
+                            ₹ 0.00 Lakh
+                        </div>
+
+                        <div
+                            id="predictedRupees"
+                            class="price-rupees"
+                        >
+                            Approx. ₹ 0
+                        </div>
+
+                    </div>
+
+
+                    <!-- MARKET SCORE -->
+
+                    <div class="market-score-box">
+
+                        <div class="score-icon">
+                            ✦
+                        </div>
+
+                        <div class="score-message">
+
+                            <strong id="scoreTitle">
+                                Great Choice!
+                            </strong>
+
+                            <p id="scoreMessage">
+                                Your vehicle has a strong
+                                market profile.
+                            </p>
+
+                        </div>
+
+
+                        <div class="score-circle">
+
+                            <span
+                                id="marketScore"
+                            >
+                                8.6
+                            </span>
+
+                        </div>
+
+
+                        <div class="score-label">
+                            Market Score
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRICE BREAKDOWN -->
+
+                    <div class="breakdown-card">
+
+                        <div class="breakdown-title">
+                            Price Breakdown
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <span>
+                                Model Prediction
+                            </span>
+
+                            <strong
+                                id="breakdownBase"
+                            >
+                                ₹ 0.00 Lakh
+                            </strong>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <span>
+                                Condition Factor
+                            </span>
+
+                            <strong
+                                id="breakdownCondition"
+                            >
+                                ₹ 0.00 Lakh
+                            </strong>
+
+                        </div>
+
+
+                        <div class="breakdown-row">
+
+                            <span>
+                                Market Demand
+                            </span>
+
+                            <strong
+                                id="breakdownDemand"
+                            >
+                                ₹ 0.00 Lakh
+                            </strong>
+
+                        </div>
+
+
+                        <div class="breakdown-divider"></div>
+
+
+                        <div class="breakdown-row total-row">
+
+                            <span>
+                                Estimated Price
+                            </span>
+
+                            <strong
+                                id="breakdownTotal"
+                            >
+                                ₹ 0.00 Lakh
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MODEL ACCURACY -->
+
+                    <div class="model-confidence">
+
+                        <div class="confidence-header">
+
+                            <span>
+                                Model Performance
+                            </span>
+
+                            <strong
+                                id="resultAccuracy"
+                            >
+                                99.39%
+                            </strong>
+
+                        </div>
+
+                        <div class="confidence-bar">
+
+                            <div
+                                id="confidenceFill"
+                                class="confidence-fill"
+                                style="width: 99.39%;"
+                            ></div>
+
+                        </div>
+
+                        <p>
+                            R² score from the trained machine
+                            learning model.
+                        </p>
+
+                    </div>
+
+
+                    <!-- DISCLAIMER -->
+
+                    <div class="result-disclaimer">
+
+                        <span>
+                            ⓘ
+                        </span>
+
+                        <p>
+                            This is an AI-generated estimate.
+                            Actual selling prices may vary based
+                            on inspection, negotiation and market
+                            conditions.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         FEATURES
+    ===================================================== -->
+
+    <section class="features-section">
+
+        <div class="features-container">
+
+
+            <div class="feature-card">
+
+                <div class="large-feature-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <h3>
+                        AI Powered
+                    </h3>
+
+                    <p>
+                        Advanced machine learning model
+                        trained on used-car data.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="large-feature-icon">
+                    ▦
+                </div>
+
+                <div>
+
+                    <h3>
+                        Real Market Data
+                    </h3>
+
+                    <p>
+                        Built using a large Indian used-car
+                        dataset.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="large-feature-icon">
+                    ⚡
+                </div>
+
+                <div>
+
+                    <h3>
+                        Instant Results
+                    </h3>
+
+                    <p>
+                        Get a valuation in just a few seconds.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="large-feature-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <h3>
+                        Smart Validation
+                    </h3>
+
+                    <p>
+                        Only valid Company → Model → Variant
+                        combinations can be selected.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         HOW IT WORKS
+    ===================================================== -->
+
+    <section
+        id="how-it-works"
+        class="how-section"
+    >
+
+        <div class="section-container">
+
+            <div class="section-heading">
+
+                <span>
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    Smart valuation in three simple steps
+                </h2>
+
+                <p>
+                    No complicated calculations.
+                    Just select the information you know.
+                </p>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon">
+                        🚘
+                    </div>
+
+                    <h3>
+                        Select Your Car
+                    </h3>
+
+                    <p>
+                        Choose the company, model and variant
+                        from the actual dataset.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon">
+                        ⚙
+                    </div>
+
+                    <h3>
+                        Add Details
+                    </h3>
+
+                    <p>
+                        Enter the details you know. The remaining
+                        fields can be left blank.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon">
+                        ✨
+                    </div>
+
+                    <h3>
+                        Get Valuation
+                    </h3>
+
+                    <p>
+                        Our trained machine learning model
+                        generates your estimated price.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         ABOUT
+    ===================================================== -->
+
+    <section
+        id="about"
+        class="about-section"
+    >
+
+        <div class="about-container">
+
+            <div class="about-content">
+
+                <span class="section-label">
+                    ABOUT CARPREDICT AI
+                </span>
+
+                <h2>
+                    Data-driven car valuation
+                    made simple.
+                </h2>
+
+                <p>
+                    CarPredict AI is designed to help buyers and
+                    sellers understand the estimated market value
+                    of used cars using machine learning.
+                </p>
+
+                <p>
+                    The system uses historical Indian used-car
+                    listing data and a trained regression model
+                    to generate an estimated selling price.
+                </p>
+
+            </div>
+
+
+            <div class="about-stat-card">
+
+                <div class="stat">
+
+                    <strong id="aboutAccuracy">
+                        99.39%
+                    </strong>
+
+                    <span>
+                        R² Model Score
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>
+                        100K+
+                    </strong>
+
+                    <span>
+                        Used-Car Records
+                    </span>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <strong>
+                        AI
+                    </strong>
+
+                    <span>
+                        Price Prediction
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div>
+
+            <div class="footer-brand">
+                CarPredict <span>AI</span>
+            </div>
+
+            <p>
+                Smart used-car valuation powered by
+                machine learning.
+            </p>
+
+        </div>
+
+
+        <div class="footer-right">
+
+            <span>
+                Built with Python + Flask + Machine Learning
+            </span>
+
+            <span>
+                © 2026 CarPredict AI
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ========================================================
+     TOAST
+========================================================= -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <div
+        id="toastIcon"
+        class="toast-icon"
+    >
+        ✓
+    </div>
+
+    <div>
+
+        <strong
+            id="toastTitle"
+        >
+            Success
+        </strong>
+
+        <p
+            id="toastMessage"
+        >
+            Operation completed.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script
+    src="{{ url_for('static', filename='app.js') }}"
+></script>
+
+</body>
+
+</html>
