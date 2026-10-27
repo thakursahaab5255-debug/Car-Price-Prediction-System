@@ -10,37 +10,37 @@
 
 :root {
 
-    --primary: #2563eb;
+    --primary: #111111;
 
-    --primary-dark: #1d4ed8;
+    --primary-dark: #000000;
 
-    --primary-light: #eff6ff;
+    --primary-light: #f5f5f5;
 
-    --dark: #07111f;
+    --dark: #000000;
 
-    --dark-2: #0d1728;
+    --dark-2: #131313;
 
-    --text: #111827;
+    --text: #111111;
 
-    --text-light: #64748b;
+    --text-light: #4b5563;
 
-    --muted: #94a3b8;
+    --muted: #6b7280;
 
-    --border: #e2e8f0;
+    --border: #d1d5db;
 
-    --background: #f7f9fc;
+    --background: #f5f5f5;
 
     --white: #ffffff;
 
-    --success: #16a34a;
+    --success: #1f1f1f;
 
-    --success-bg: #f0fdf4;
+    --success-bg: #f3f4f6;
 
-    --danger: #dc2626;
+    --danger: #111111;
 
-    --danger-bg: #fef2f2;
+    --danger-bg: #f3f4f6;
 
-    --warning: #f59e0b;
+    --warning: #525252;
 
     --shadow-sm:
         0 2px 8px rgba(15, 23, 42, 0.05);
@@ -68,23 +68,146 @@
 
 body.dark-mode {
 
-    --background: #070d17;
+    --background: #050505;
 
-    --white: #0e1726;
+    --white: #111111;
 
-    --text: #f8fafc;
+    --text: #f9fafb;
 
-    --text-light: #a8b3c4;
+    --text-light: #d1d5db;
 
-    --muted: #718096;
+    --muted: #9ca3af;
 
-    --border: #1e2b3e;
+    --border: #374151;
 
-    --primary-light: #10234b;
+    --primary-light: #1f1f1f;
 
-    --success-bg: #092216;
+    --success-bg: #1a1a1a;
 
-    --dark: #020617;
+    --dark: #000000;
+
+}
+
+
+body.dark-mode .hero-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #111111 0%,
+            #050505 100%
+        );
+
+}
+
+
+body.dark-mode .hero-background {
+
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,0.12)
+            1px,
+            transparent 1px
+        );
+
+}
+
+
+body.dark-mode .hero-badge,
+body.dark-mode .feature-icon,
+body.dark-mode .optional-badge {
+
+    background: #242424;
+    color: #f9fafb;
+
+}
+
+
+body.dark-mode .hero-content h1,
+body.dark-mode .hero-content h1 span,
+body.dark-mode .section-title h3,
+body.dark-mode .section-heading h2,
+body.dark-mode .card-header h2,
+body.dark-mode .accuracy-card strong,
+body.dark-mode .instant-card strong {
+
+    color: #f9fafb;
+
+}
+
+
+body.dark-mode .hero-description,
+body.dark-mode .hero-feature,
+body.dark-mode .car-visual-text,
+body.dark-mode .section-title p,
+body.dark-mode .section-heading p,
+body.dark-mode .card-header p,
+body.dark-mode .accuracy-card span,
+body.dark-mode .instant-card small {
+
+    color: #c5c5c5;
+
+}
+
+
+body.dark-mode .accuracy-card,
+body.dark-mode .instant-card,
+body.dark-mode .form-card,
+body.dark-mode .result-card,
+body.dark-mode .feature-card,
+body.dark-mode .step-card {
+
+    background: #151515;
+    border-color: #363636;
+    color: #f9fafb;
+
+}
+
+
+body.dark-mode .card-header,
+body.dark-mode .form-section,
+body.dark-mode .section-container {
+
+    background: transparent;
+
+}
+
+
+body.dark-mode .prediction-section,
+body.dark-mode .features-section,
+body.dark-mode .how-section,
+body.dark-mode .about-section {
+
+    background: #0b0b0b;
+
+}
+
+
+body.dark-mode .form-input,
+body.dark-mode .form-select,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+
+    background: #1b1b1b;
+    border-color: #444444;
+    color: #f9fafb;
+
+}
+
+
+body.dark-mode .form-input::placeholder,
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+
+    color: #929292;
+
+}
+
+
+body.dark-mode .footer {
+
+    background: #050505;
 
 }
 
@@ -204,7 +327,7 @@ a {
 
     height: 45px;
 
-    border: 4px solid #dbeafe;
+    border: 4px solid #e5e5e5;
 
     border-top-color: var(--primary);
 
@@ -309,13 +432,13 @@ a {
     background:
         linear-gradient(
             135deg,
-            #2563eb,
-            #3b82f6
+            #111111,
+            #525252
         );
 
     box-shadow:
         0 8px 25px
-        rgba(37, 99, 235, 0.30);
+        rgba(0, 0, 0, 0.18);
 
 }
 
@@ -335,7 +458,7 @@ a {
 
 .brand-name span {
 
-    color: #60a5fa;
+    color: #a1a1aa;
 
 }
 
@@ -374,7 +497,7 @@ a {
 
     padding: 24px 0;
 
-    color: #d7dee8;
+    color: #e5e5e5;
 
     font-size: 14px;
 
@@ -422,8 +545,8 @@ a {
     background:
         linear-gradient(
             90deg,
-            #2563eb,
-            #60a5fa
+            #111111,
+            #a1a1aa
         );
 
 }
@@ -474,7 +597,7 @@ a {
 
     border-radius: 50%;
 
-    background: #22c55e;
+    background: #3f3f46;
 
     box-shadow:
         0 0 0 4px
@@ -485,7 +608,7 @@ a {
 
 .model-status.offline .status-dot {
 
-    background: #ef4444;
+    background: #3f3f46;
 
 }
 
@@ -569,7 +692,7 @@ a {
     background:
         linear-gradient(
             180deg,
-            #f8fafc 0%,
+            #f8f8f8 0%,
             #ffffff 100%
         );
 
@@ -586,7 +709,7 @@ a {
 
     background-image:
         radial-gradient(
-            rgba(37,99,235,0.10)
+            rgba(0,0,0,0.08)
             1px,
             transparent 1px
         );
@@ -646,10 +769,10 @@ a {
     border-radius: 999px;
 
     background:
-        #eff6ff;
+        #f5f5f5;
 
     color:
-        #2563eb;
+        #111111;
 
     font-size: 12px;
 
@@ -684,7 +807,7 @@ a {
 
     letter-spacing: -3px;
 
-    color: #050a13;
+    color: #111111;
 
     font-weight: 800;
 
@@ -695,7 +818,7 @@ a {
 
     display: block;
 
-    color: #2563eb;
+    color: #111111;
 
 }
 
@@ -706,7 +829,7 @@ a {
 
     margin-top: 20px;
 
-    color: #5d697a;
+    color: #4b5563;
 
     font-size: 16px;
 
@@ -738,7 +861,7 @@ a {
 
     gap: 9px;
 
-    color: #586476;
+    color: #4b5563;
 
     font-size: 13px;
 
@@ -759,9 +882,9 @@ a {
 
     border-radius: 8px;
 
-    background: #eff6ff;
+    background: #f5f5f5;
 
-    color: #2563eb;
+    color: #111111;
 
     font-size: 15px;
 
@@ -798,7 +921,7 @@ a {
     background:
         radial-gradient(
             ellipse,
-            rgba(37,99,235,0.13),
+            rgba(0,0,0,0.08),
             transparent 68%
         );
 
@@ -830,23 +953,279 @@ a {
 
 .car-icon-large {
 
-    font-size: 145px;
+    position: relative;
+    width: 390px;
+    height: 220px;
+    animation: car-arrive 1.35s cubic-bezier(.2,.8,.2,1) both;
 
-    filter:
-        drop-shadow(
-            0 25px 20px
-            rgba(15,23,42,0.18)
-        );
+}
 
-    transform:
-        scaleX(-1);
+
+.bmw-car {
+
+    position: absolute;
+    left: 20px;
+    bottom: 35px;
+    width: 350px;
+    height: 145px;
+    transform: perspective(550px) rotateX(8deg) rotateY(-7deg);
+    filter: drop-shadow(0 22px 14px rgba(17,17,17,0.24));
+    animation: car-cruise 4s ease-in-out 1.35s infinite;
+
+}
+
+
+.bmw-roof {
+
+    position: absolute;
+    top: 0;
+    left: 96px;
+    width: 174px;
+    height: 76px;
+    overflow: hidden;
+    border: 5px solid #111111;
+    border-bottom: 0;
+    border-radius: 86px 105px 0 0;
+    background: #d7d7d7;
+    transform: skewX(-12deg);
+    box-shadow: inset 0 8px 0 #f8f8f8, inset -10px -4px 0 #aaaaaa;
+
+}
+
+
+.bmw-window {
+
+    position: absolute;
+    top: 10px;
+    height: 48px;
+    background: linear-gradient(145deg, #f5f5f5 0%, #777777 48%, #202020 100%);
+    border: 3px solid #111111;
+
+}
+
+
+.bmw-window-front {
+
+    left: 87px;
+    width: 77px;
+    border-radius: 4px 35px 2px 2px;
+
+}
+
+
+.bmw-window-rear {
+
+    left: 14px;
+    width: 69px;
+    border-radius: 28px 3px 2px 2px;
+
+}
+
+
+.bmw-body {
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 350px;
+    height: 91px;
+    border: 5px solid #111111;
+    border-radius: 38px 70px 24px 30px;
+    background: linear-gradient(165deg, #fafafa 0%, #c6c6c6 42%, #696969 100%);
+    box-shadow: inset 0 8px 0 rgba(255,255,255,0.8), inset 0 -12px 0 rgba(0,0,0,0.3);
+
+}
+
+
+.bmw-hood {
+
+    position: absolute;
+    top: 13px;
+    left: 193px;
+    width: 101px;
+    height: 27px;
+    border-top: 3px solid #666666;
+    border-radius: 50%;
+    transform: skewX(-14deg);
+
+}
+
+
+.bmw-door {
+
+    position: absolute;
+    top: 8px;
+    width: 2px;
+    height: 59px;
+    background: #555555;
+
+}
+
+
+.bmw-door-front {
+    left: 186px;
+    transform: skewX(-7deg);
+}
+
+
+.bmw-door-rear {
+    left: 112px;
+    transform: skewX(-8deg);
+}
+
+
+.bmw-handle {
+
+    position: absolute;
+    top: 28px;
+    width: 17px;
+    height: 3px;
+    border-radius: 4px;
+    background: #333333;
+
+}
+
+
+.bmw-handle-front {
+    left: 154px;
+}
+
+
+.bmw-handle-rear {
+    left: 91px;
+}
+
+
+.bmw-grille {
+
+    position: absolute;
+    right: 17px;
+    top: 31px;
+    display: flex;
+    gap: 3px;
+    width: 31px;
+    height: 34px;
+    padding: 4px 5px;
+    border: 3px solid #111111;
+    border-radius: 48% 42% 45% 47%;
+    background: #3c3c3c;
+    transform: skewX(-8deg);
+
+}
+
+
+.bmw-grille span {
+    width: 6px;
+    border-radius: 50%;
+    background: #bdbdbd;
+}
+
+
+.bmw-headlight {
+
+    position: absolute;
+    right: 52px;
+    top: 23px;
+    width: 29px;
+    height: 15px;
+    border: 3px solid #111111;
+    border-radius: 65% 35% 60% 35%;
+    background: #ffffff;
+    transform: rotate(-8deg);
+    box-shadow: 0 0 10px #ffffff;
+
+}
+
+
+.bmw-wheel {
+
+    position: absolute;
+    bottom: -22px;
+    width: 57px;
+    height: 57px;
+    border: 8px solid #111111;
+    border-radius: 50%;
+    background: #cfcfcf;
+    box-shadow: inset 0 0 0 5px #555555, inset 0 0 0 12px #eeeeee;
+    animation: wheel-roll .7s linear 1.35s infinite;
+
+}
+
+
+.bmw-wheel::before,
+.bmw-wheel::after,
+.bmw-wheel i::before,
+.bmw-wheel i::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 4px;
+    width: 4px;
+    height: 33px;
+    border-radius: 3px;
+    background: #555555;
+    transform-origin: 50% 24px;
+}
+
+
+.bmw-wheel::after {
+    transform: rotate(90deg);
+}
+
+
+.bmw-wheel i::before {
+    transform: rotate(45deg);
+}
+
+
+.bmw-wheel i::after {
+    transform: rotate(-45deg);
+}
+
+
+.bmw-wheel-front {
+    right: 42px;
+}
+
+
+.bmw-wheel-rear {
+    left: 49px;
+}
+
+
+@keyframes car-arrive {
+    from {
+        opacity: 0;
+        transform: translateX(170px) scale(.72) rotate(4deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotate(0);
+    }
+}
+
+
+@keyframes car-cruise {
+    0%, 100% {
+        transform: perspective(550px) rotateX(8deg) rotateY(-7deg) translateY(0);
+    }
+    50% {
+        transform: perspective(550px) rotateX(8deg) rotateY(-7deg) translateY(-7px);
+    }
+}
+
+
+@keyframes wheel-roll {
+    to {
+        transform: rotate(360deg);
+    }
 
 }
 
 
 .car-visual-text {
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 12px;
 
@@ -915,7 +1294,7 @@ a {
 
     display: block;
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 11px;
 
@@ -928,7 +1307,7 @@ a {
 
     margin-top: 4px;
 
-    color: #2563eb;
+    color: #111111;
 
     font-size: 25px;
 
@@ -937,7 +1316,7 @@ a {
 
 .accuracy-card small {
 
-    color: #16a34a;
+    color: #1f1f1f;
 
     font-size: 11px;
 
@@ -997,9 +1376,9 @@ a {
 
     align-items: center;
 
-    background: #eff6ff;
+    background: #f5f5f5;
 
-    color: #2563eb;
+    color: #111111;
 
 }
 
@@ -1010,7 +1389,7 @@ a {
 
     font-size: 10px;
 
-    color: #64748b;
+    color: #4b5563;
 
 }
 
@@ -1021,7 +1400,7 @@ a {
 
     font-size: 13px;
 
-    color: #111827;
+    color: #111111;
 
 }
 
@@ -1161,11 +1540,11 @@ a {
 
     border:
         1px solid
-        #dbe4ee;
+        #e5e5e5;
 
     border-radius: 999px;
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 11px;
 
@@ -1188,7 +1567,7 @@ a {
 
     background: #dcfce7;
 
-    color: #16a34a;
+    color: #1f1f1f;
 
     font-size: 9px;
 
@@ -1350,7 +1729,7 @@ a {
 
 .form-group input::placeholder {
 
-    color: #a5afbd;
+    color: #d1d5db;
 
 }
 
@@ -1359,7 +1738,7 @@ a {
 .form-group select:hover {
 
     border-color:
-        #b8c5d6;
+        #cfcfcf;
 
 }
 
@@ -1372,7 +1751,7 @@ a {
 
     box-shadow:
         0 0 0 3px
-        rgba(37,99,235,0.10);
+        rgba(0,0,0,0.08);
 
 }
 
@@ -1382,7 +1761,7 @@ a {
     cursor: not-allowed;
 
     background:
-        #f8fafc;
+        #f8f8f8;
 
     color:
         #a0aaba;
@@ -1419,7 +1798,7 @@ a {
     transform:
         translateY(-50%);
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 15px;
 
@@ -1434,7 +1813,7 @@ a {
 
     margin-top: 5px;
 
-    color: #94a3b8;
+    color: #6b7280;
 
     font-size: 9px;
 
@@ -1443,7 +1822,7 @@ a {
 
 .field-hint.ready {
 
-    color: #16a34a;
+    color: #1f1f1f;
 
 }
 
@@ -1475,8 +1854,8 @@ a {
     background:
         linear-gradient(
             135deg,
-            #2563eb,
-            #1d4ed8
+            #111111,
+            #000000
         );
 
     color: white;
@@ -1495,7 +1874,7 @@ a {
 
     box-shadow:
         0 8px 20px
-        rgba(37,99,235,0.25);
+        rgba(0,0,0,0.18);
 
     transition:
         transform 0.2s ease,
@@ -1512,7 +1891,7 @@ a {
 
     box-shadow:
         0 12px 25px
-        rgba(37,99,235,0.32);
+        rgba(0,0,0,0.22);
 
 }
 
@@ -1590,7 +1969,7 @@ a {
 
     margin-top: 11px;
 
-    color: #94a3b8;
+    color: #6b7280;
 
     font-size: 9px;
 
@@ -1677,11 +2056,11 @@ a {
 
     border:
         1px solid
-        #dcefe2;
+        #e5e5e5;
 
     border-radius: 999px;
 
-    color: #36945a;
+    color: #4b5563;
 
     background:
         #f5fcf7;
@@ -1823,7 +2202,7 @@ a {
 
     margin-top: 2px;
 
-    color: #2563eb;
+    color: #111111;
 
     font-size:
         clamp(
@@ -1865,15 +2244,15 @@ a {
 
     border:
         1px solid
-        #d7eadf;
+        #e5e5e5;
 
     border-radius: 12px;
 
     background:
         linear-gradient(
             135deg,
-            #f2fbf5,
-            #f9fdf9
+            #f5f5f5,
+            #f8f8f8
         );
 
     display: flex;
@@ -1905,7 +2284,7 @@ a {
         #dcfce7;
 
     color:
-        #16a34a;
+        #1f1f1f;
 
 }
 
@@ -1914,7 +2293,7 @@ a {
 
     display: block;
 
-    color: #18281e;
+    color: #111111;
 
     font-size: 12px;
 
@@ -1925,7 +2304,7 @@ a {
 
     margin-top: 2px;
 
-    color: #5e7666;
+    color: #4b5563;
 
     font-size: 9px;
 
@@ -1948,7 +2327,7 @@ a {
 
     border:
         3px solid
-        #8bcda4;
+        #d1d5db;
 
     display: flex;
 
@@ -1977,7 +2356,7 @@ a {
 
     text-align: center;
 
-    color: #708078;
+    color: #6b7280;
 
     font-size: 7px;
 
@@ -2042,7 +2421,7 @@ a {
 
 .breakdown-row.negative strong {
 
-    color: #dc2626;
+    color: #1f1f1f;
 
 }
 
@@ -2078,7 +2457,7 @@ a {
 
 .total-row strong {
 
-    color: #2563eb;
+    color: #111111;
 
     font-size: 12px;
 
@@ -2111,7 +2490,7 @@ a {
 
 .confidence-header strong {
 
-    color: #2563eb;
+    color: #111111;
 
 }
 
@@ -2142,8 +2521,8 @@ a {
     background:
         linear-gradient(
             90deg,
-            #60a5fa,
-            #2563eb
+            #a1a1aa,
+            #111111
         );
 
     transition:
@@ -2188,7 +2567,7 @@ a {
 
 .result-disclaimer span {
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 10px;
 
@@ -2421,7 +2800,7 @@ a {
 
     right: 20px;
 
-    color: #d6deea;
+    color: #e5e5e5;
 
     font-size: 20px;
 
@@ -2602,9 +2981,9 @@ a {
 .footer {
 
     background:
-        #07111f;
+        #111111;
 
-    color: #aeb9c8;
+    color: #d1d5db;
 
     padding:
         28px 30px;
@@ -2642,7 +3021,7 @@ a {
 
 .footer-brand span {
 
-    color: #60a5fa;
+    color: #a1a1aa;
 
 }
 
@@ -2747,7 +3126,7 @@ a {
 
     background: #dcfce7;
 
-    color: #16a34a;
+    color: #1f1f1f;
 
 }
 
@@ -2756,7 +3135,7 @@ a {
 
     background: #fee2e2;
 
-    color: #dc2626;
+    color: #1f1f1f;
 
 }
 
@@ -2834,6 +3213,237 @@ a {
     }
 
 
+    body.dark-mode .hero-section {
+
+        background:
+            linear-gradient(
+                180deg,
+                #111111 0%,
+                #050505 100%
+            );
+
+    }
+
+
+    body.dark-mode .hero-background {
+
+        background-image:
+            radial-gradient(
+                rgba(255,255,255,0.12)
+                1px,
+                transparent 1px
+            );
+
+    }
+
+
+    body.dark-mode .hero-badge,
+    body.dark-mode .feature-icon,
+    body.dark-mode .optional-badge {
+
+        background: #242424;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .hero-content h1,
+    body.dark-mode .hero-content h1 span,
+    body.dark-mode .section-title h3,
+    body.dark-mode .section-heading h2,
+    body.dark-mode .card-header h2,
+    body.dark-mode .accuracy-card strong,
+    body.dark-mode .instant-card strong {
+
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .hero-description,
+    body.dark-mode .hero-feature,
+    body.dark-mode .car-visual-text,
+    body.dark-mode .section-title p,
+    body.dark-mode .section-heading p,
+    body.dark-mode .card-header p,
+    body.dark-mode .accuracy-card span,
+    body.dark-mode .instant-card small {
+
+        color: #c5c5c5;
+
+    }
+
+
+    body.dark-mode .accuracy-card,
+    body.dark-mode .instant-card,
+    body.dark-mode .form-card,
+    body.dark-mode .result-card,
+    body.dark-mode .feature-card,
+    body.dark-mode .step-card {
+
+        background: #151515;
+        border-color: #363636;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .prediction-section,
+    body.dark-mode .features-section,
+    body.dark-mode .how-section,
+    body.dark-mode .about-section {
+
+        background: #0b0b0b;
+
+    }
+
+
+    body.dark-mode .form-input,
+    body.dark-mode .form-select,
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+
+        background: #1b1b1b;
+        border-color: #444444;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .form-input::placeholder,
+    body.dark-mode input::placeholder,
+    body.dark-mode textarea::placeholder {
+
+        color: #929292;
+
+    }
+
+
+    body.dark-mode .footer {
+
+        background: #050505;
+
+    }
+
+
+    /* Keep dark mode overrides after component styles so fixed light surfaces
+       cannot override the active theme. */
+
+    body.dark-mode .hero-section {
+
+        background:
+            linear-gradient(
+                180deg,
+                #111111 0%,
+                #050505 100%
+            );
+
+    }
+
+
+    body.dark-mode .hero-background {
+
+        background-image:
+            radial-gradient(
+                rgba(255,255,255,0.12)
+                1px,
+                transparent 1px
+            );
+
+    }
+
+
+    body.dark-mode .hero-badge,
+    body.dark-mode .feature-icon,
+    body.dark-mode .optional-badge {
+
+        background: #242424;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .hero-content h1,
+    body.dark-mode .hero-content h1 span,
+    body.dark-mode .section-title h3,
+    body.dark-mode .section-heading h2,
+    body.dark-mode .card-header h2,
+    body.dark-mode .accuracy-card strong,
+    body.dark-mode .instant-card strong {
+
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .hero-description,
+    body.dark-mode .hero-feature,
+    body.dark-mode .car-visual-text,
+    body.dark-mode .section-title p,
+    body.dark-mode .section-heading p,
+    body.dark-mode .card-header p,
+    body.dark-mode .accuracy-card span,
+    body.dark-mode .instant-card small {
+
+        color: #c5c5c5;
+
+    }
+
+
+    body.dark-mode .accuracy-card,
+    body.dark-mode .instant-card,
+    body.dark-mode .form-card,
+    body.dark-mode .result-card,
+    body.dark-mode .feature-card,
+    body.dark-mode .step-card {
+
+        background: #151515;
+        border-color: #363636;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .prediction-section,
+    body.dark-mode .features-section,
+    body.dark-mode .how-section,
+    body.dark-mode .about-section {
+
+        background: #0b0b0b;
+
+    }
+
+
+    body.dark-mode .form-input,
+    body.dark-mode .form-select,
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+
+        background: #1b1b1b;
+        border-color: #444444;
+        color: #f9fafb;
+
+    }
+
+
+    body.dark-mode .form-input::placeholder,
+    body.dark-mode input::placeholder,
+    body.dark-mode textarea::placeholder {
+
+        color: #929292;
+
+    }
+
+
+    body.dark-mode .footer {
+
+        background: #050505;
+
+    }
+
+
     .mobile-menu-button {
 
         display: block;
@@ -2857,7 +3467,7 @@ a {
 
     .mobile-nav a {
 
-        color: #d7dee8;
+        color: #e5e5e5;
 
         padding:
             12px 10px;
@@ -3168,7 +3778,7 @@ a {
 
     outline:
         3px solid
-        rgba(37,99,235,0.30);
+        rgba(0,0,0,0.18);
 
     outline-offset: 2px;
 
@@ -3249,8 +3859,8 @@ a {
     background:
         linear-gradient(
             135deg,
-            #00d4ff,
-            #7c3aed
+            #f5f5f5,
+            #1f1f1f
         );
 
     color: #ffffff;
@@ -3273,7 +3883,7 @@ a {
 
 .user-welcome {
 
-    color: #64748b;
+    color: #4b5563;
 
     font-size: 9px;
 
@@ -3363,5 +3973,17 @@ a {
         font-size: 10px;
 
     }
+
+}
+
+
+body.dark-mode .hero-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #111111 0%,
+            #050505 100%
+        );
 
 }

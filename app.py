@@ -91,19 +91,39 @@ def get_db_connection():
 
     return connection
 
-
 def initialize_database():
     connection = get_db_connection()
 
+    # Create users table if it does not already exist
     connection.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,
             email TEXT NOT NULL UNIQUE,
             password_hash TEXT NOT NULL,
+            role TEXT NOT NULL DEFAULT 'buyer',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+
+    # ---------------------------------------------------------
+    # SAFE DATABASE MIGRATION
+    # ---------------------------------------------------------
+    # If the existing users table was created before the
+    # role system was added, add the role column now.
+    columns = connection.execute(
+        "PRAGMA table_info(users)"
+    ).fetchall()
+
+    column_names = [column["name"] for column in columns]
+
+    if "role" not in column_names:
+        connection.execute("""
+            ALTER TABLE users
+            ADD COLUMN role TEXT NOT NULL DEFAULT 'buyer'
+        """)
+
+        print("Added 'role' column to users table.")
 
     connection.commit()
     connection.close()
