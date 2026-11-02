@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Browse used cars for sale or list your car on the CarPredict AI marketplace.">
+<title>Buy &amp; Sell Cars | CarPredict AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/marketplace.css') }}">
+</head>
+<body>
+<header class="topbar">
+    <div class="nav market-nav">
+        <a class="brand" href="/">
+            <span class="logo">CP</span>
+            <span><strong>CarPredict <em>AI</em></strong><small>Smart Car Valuation</small></span>
+        </a>
+        <nav>
+            <a href="/">Home</a>
+            <a class="active" href="/marketplace">Marketplace</a>
+        </nav>
+        <div class="navright"><button id="theme" type="button" aria-label="Toggle dark theme">☾</button></div>
+    </div>
+</header>
+
+<main class="market-wrap">
+    <section class="market-hero">
+        <div class="market-hero-copy">
+            <span class="eyebrow">CARPREDICT AI MARKETPLACE</span>
+            <h1>Good cars.<br><span>Good people.</span></h1>
+            <p>Find a car that fits your life, or pass yours on to its next owner. Browse local listings and speak directly with the seller.</p>
+        </div>
+        <a class="market-cta" href="#sell">List your car <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="market-layout">
+        <section class="market-panel listings-panel" id="listings">
+            <div class="market-heading">
+                <div>
+                    <span class="market-kicker">AVAILABLE CARS</span>
+                    <h2>Cars for sale</h2>
+                </div>
+                <label class="search-wrap">
+                    <span class="sr-only">Search listings</span>
+                    <input id="listingSearch" type="search" placeholder="Search make, model, or city">
+                </label>
+            </div>
+            <p id="listingStatus" class="listing-status" role="status" aria-live="polite">Loading listings…</p>
+            <div id="listingGrid" class="listing-grid"></div>
+            <div id="emptyState" class="empty-state" hidden>
+                <span aria-hidden="true">🚘</span>
+                <h3>No cars listed yet</h3>
+                <p>Be the first to add a car to the marketplace.</p>
+            </div>
+        </section>
+
+        <section class="market-panel sell-panel" id="sell">
+            <div class="market-heading">
+                <div>
+                    <span class="market-kicker">SELL YOUR CAR</span>
+                    <h2>Create a listing</h2>
+                </div>
+            </div>
+            <p class="form-intro">Share the details buyers need. Your listing and contact details will be visible to visitors.</p>
+            <form id="listingForm">
+                <div class="listing-fields">
+                    <label>Car make <b>*</b><input name="make" maxlength="80" placeholder="e.g. Maruti Suzuki" required></label>
+                    <label>Model <b>*</b><input name="model" maxlength="80" placeholder="e.g. Swift" required></label>
+                    <label>Year <b>*</b><input name="year" type="number" min="1950" max="2100" placeholder="e.g. 2021" required></label>
+                    <label>Kilometers driven <b>*</b><input name="kilometers" type="number" min="0" max="5000000" placeholder="e.g. 45000" required></label>
+                    <label>Asking price (₹) <b>*</b><input name="price_rupees" type="number" min="1" max="1000000000" step="1" placeholder="e.g. 650000" required></label>
+                    <label>City <b>*</b><input name="city" maxlength="80" placeholder="e.g. Pune" required></label>
+                    <label>Fuel type
+                        <select name="fuel_type">
+                            <option value="">Select fuel</option>
+                            <option>Petrol</option><option>Diesel</option><option>CNG</option><option>Electric</option><option>Hybrid</option>
+                        </select>
+                    </label>
+                    <label>Transmission
+                        <select name="transmission">
+                            <option value="">Select transmission</option>
+                            <option>Manual</option><option>Automatic</option>
+                        </select>
+                    </label>
+                    <label>Condition
+                        <select name="condition">
+                            <option value="">Select condition</option>
+                            <option>Excellent</option><option>Good</option><option>Fair</option>
+                        </select>
+                    </label>
+                    <label>Your name <b>*</b><input name="seller_name" maxlength="80" placeholder="Name shown to buyers" required></label>
+                    <label>Email<input name="seller_email" type="email" maxlength="120" placeholder="you@example.com"></label>
+                    <label>Phone<input name="seller_phone" type="tel" maxlength="30" placeholder="+91 98765 43210"></label>
+                    <label class="description-field">Description<textarea name="description" maxlength="1000" rows="4" placeholder="Add service history, features, or anything else buyers should know."></textarea></label>
+                </div>
+                <p class="contact-note">Add an email address or phone number so buyers can reach you. Contact details are public on your listing.</p>
+                <div id="listingError" class="listing-message error-message" role="alert" hidden></div>
+                <div id="listingSuccess" class="listing-message success-message" role="status" hidden></div>
+                <button id="submitListing" class="market-submit" type="submit">Publish listing</button>
+            </form>
+        </section>
+    </section>
+</main>
+<footer class="market-footer"><a href="/">CarPredict AI</a><span>Buy and sell directly with local car owners.</span></footer>
+<script src="{{ url_for('static', filename='js/marketplace.js') }}"></script>
+</body>
+</html>

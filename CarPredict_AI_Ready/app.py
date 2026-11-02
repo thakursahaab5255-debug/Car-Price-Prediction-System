@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 from pathlib import Path
-import json, math
+import json, math, re, sqlite3
 import joblib
 import pandas as pd
 
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_FILE = BASE_DIR / 'model' / 'car_price_model.joblib'
 META_FILE = BASE_DIR / 'model' / 'metadata.json'
+LISTINGS_DB = BASE_DIR / 'marketplace.db'
 app = Flask(__name__)
 model = None
 metadata = {}
@@ -25,8 +26,143 @@ def load_artifacts():
         except Exception as e: print('[ERROR] Metadata load failed:', e)
 load_artifacts()
 
+def initialize_listings_db():
+    connection = sqlite3.connect(LISTINGS_DB)
+    try:
+        connection.execute('''
+            CREATE TABLE IF NOT EXISTS car_listings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                seller_name TEXT NOT NULL,
+                seller_email TEXT,
+                seller_phone TEXT,
+                make TEXT NOT NULL,
+                model TEXT NOT NULL,
+                year INTEGER NOT NULL,
+                kilometers INTEGER NOT NULL,
+                price_rupees INTEGER NOT NULL,
+                city TEXT NOT NULL,
+                fuel_type TEXT,
+                transmission TEXT,
+                condition TEXT,
+                description TEXT,
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        connection.commit()
+    finally:
+        connection.close()
+
+initialize_listings_db()
+
 @app.route('/')
 def home(): return render_template('index.html')
+
+@app.route('/marketplace')
+def marketplace(): return render_template('marketplace.html')
+
+def validate_listing(payload):
+    if not isinstance(payload, dict):
+        raise ValueError('Please submit a valid listing.')
+
+    text_fields = {
+        'seller_name': ('Seller name', 80, True),
+        'seller_email': ('Email address', 120, False),
+        'seller_phone': ('Phone number', 30, False),
+        'make': ('Car make', 80, True),
+        'model': ('Car model', 80, True),
+        'city': ('City', 80, True),
+        'fuel_type': ('Fuel type', 40, False),
+        'transmission': ('Transmission', 40, False),
+        'condition': ('Condition', 40, False),
+        'description': ('Description', 1000, False),
+    }
+    listing = {}
+    for field, (label, limit, required) in text_fields.items():
+        value = payload.get(field)
+        value = value.strip() if isinstance(value, str) else ''
+        if required and not value:
+            raise ValueError(f'{label} is required.')
+        if len(value) > limit:
+            raise ValueError(f'{label} must be {limit} characters or fewer.')
+        listing[field] = value or None
+
+    email = listing['seller_email']
+    if email and not re.fullmatch(r'[^@\s]+@[^@\s]+\.[^@\s]+', email):
+        raise ValueError('Enter a valid email address.')
+
+    phone = listing['seller_phone']
+    if phone and (
+        not re.fullmatch(r'[\d+\-() ]{7,30}', phone)
+        or sum(character.isdigit() for character in phone) < 7
+    ):
+        raise ValueError('Enter a valid phone number.')
+    if not email and not phone:
+        raise ValueError('Provide an email address or phone number so buyers can contact you.')
+
+    for field, label in (
+        ('year', 'Manufacturing year'),
+        ('kilometers', 'Kilometers driven'),
+        ('price_rupees', 'Asking price'),
+    ):
+        value = payload.get(field)
+        raw_value = '' if value is None else str(value).strip()
+        if isinstance(value, bool) or not re.fullmatch(r'\d+', raw_value):
+            raise ValueError(f'{label} must be a whole number.')
+        listing[field] = int(raw_value)
+
+    if not 1950 <= listing['year'] <= 2100:
+        raise ValueError('Manufacturing year must be between 1950 and 2100.')
+    if not 0 <= listing['kilometers'] <= 5000000:
+        raise ValueError('Kilometers driven must be between 0 and 5,000,000.')
+    if not 1 <= listing['price_rupees'] <= 1000000000:
+        raise ValueError('Asking price must be between ₹1 and ₹1,00,00,00,000.')
+    return listing
+
+@app.route('/api/listings', methods=['GET', 'POST'])
+def listings():
+    if request.method == 'GET':
+        connection = sqlite3.connect(LISTINGS_DB)
+        connection.row_factory = sqlite3.Row
+        try:
+            rows = connection.execute(
+                'SELECT * FROM car_listings ORDER BY id DESC'
+            ).fetchall()
+            return jsonify({'success': True, 'listings': [dict(row) for row in rows]})
+        except sqlite3.Error as e:
+            app.logger.exception('Could not load marketplace listings: %s', e)
+            return jsonify({'success': False, 'error': 'Could not load car listings.'}), 500
+        finally:
+            connection.close()
+
+    try:
+        listing = validate_listing(request.get_json(silent=True))
+    except ValueError as e:
+        return jsonify({'success': False, 'error': str(e)}), 400
+
+    fields = (
+        'seller_name', 'seller_email', 'seller_phone', 'make', 'model',
+        'year', 'kilometers', 'price_rupees', 'city', 'fuel_type',
+        'transmission', 'condition', 'description',
+    )
+    connection = sqlite3.connect(LISTINGS_DB)
+    connection.row_factory = sqlite3.Row
+    try:
+        cursor = connection.execute(
+            f"INSERT INTO car_listings ({', '.join(fields)}) "
+            f"VALUES ({', '.join('?' for _ in fields)})",
+            tuple(listing[field] for field in fields),
+        )
+        connection.commit()
+        row = connection.execute(
+            'SELECT * FROM car_listings WHERE id = ?', (cursor.lastrowid,)
+        ).fetchone()
+        return jsonify({'success': True, 'listing': dict(row)}), 201
+    except sqlite3.Error as e:
+        connection.rollback()
+        app.logger.exception('Could not save marketplace listing: %s', e)
+        return jsonify({'success': False, 'error': 'Could not save your listing.'}), 500
+    finally:
+        connection.close()
 
 @app.route('/api/status')
 def status():
