@@ -1,1 +1,11 @@
-users.db
+venv/
+__pycache__/
+.env
+*.db
+static/uploads/
+venv/
+__pycache__/
+.env
+*.db
+*.log
+static/uploads/

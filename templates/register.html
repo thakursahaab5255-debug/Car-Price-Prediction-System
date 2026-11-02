@@ -36,6 +36,47 @@
             box-sizing: border-box;
         }
 
+        .role-picker {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            border: 0;
+        }
+
+        .role-picker legend {
+            grid-column: 1 / -1;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .role-picker label {
+            position: relative;
+            padding: 14px 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .role-picker input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .role-picker label:has(input:checked) {
+            border-color: #111;
+            background: #f2f2f2;
+        }
+
+        @media (max-width: 520px) {
+            .role-picker {
+                grid-template-columns: 1fr;
+            }
+        }
+
         body {
 
             min-height: 100vh;
@@ -389,6 +430,23 @@
                 >
 
             </div>
+
+
+            <fieldset class="role-picker">
+                <legend>I want to use CarPredict AI as</legend>
+                <label>
+                    <input type="radio" name="role" value="buyer" checked>
+                    <strong>Buyer</strong>
+                </label>
+                <label>
+                    <input type="radio" name="role" value="seller">
+                    <strong>Seller</strong>
+                </label>
+                <label>
+                    <input type="radio" name="role" value="both">
+                    <strong>Buyer &amp; Seller</strong>
+                </label>
+            </fieldset>
 
 
             <div class="form-group">

@@ -21,7 +21,9 @@
 from pathlib import Path
 import json
 import math
+import re
 import traceback
+import uuid
 
 import numpy as np
 import pandas as pd
@@ -34,12 +36,14 @@ from flask import (
     redirect,
     url_for,
     session,
-    flash
+    flash,
+    send_from_directory,
 )
 
 import sqlite3
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 from catboost import CatBoostRegressor
 
@@ -68,6 +72,10 @@ BASE_DIR = Path(__file__).resolve().parent
 app.secret_key = "CarPredict_AI_Change_This_Secret_Key"
 
 DATABASE_FILE = BASE_DIR / "users.db"
+MARKETPLACE_DATABASE_FILE = BASE_DIR / "marketplace.db"
+MARKETPLACE_UPLOAD_DIR = BASE_DIR / "static" / "uploads" / "marketplace"
+MARKETPLACE_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
 
 # ============================================================
 # ADMIN SETTINGS
@@ -127,6 +135,43 @@ def initialize_database():
 
     connection.commit()
     connection.close()
+
+    marketplace_connection = sqlite3.connect(
+        str(MARKETPLACE_DATABASE_FILE)
+    )
+    marketplace_connection.row_factory = sqlite3.Row
+    marketplace_connection.execute("""
+        CREATE TABLE IF NOT EXISTS car_listings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            seller_name TEXT NOT NULL,
+            seller_email TEXT,
+            seller_phone TEXT,
+            make TEXT NOT NULL,
+            model TEXT NOT NULL,
+            year INTEGER NOT NULL,
+            kilometers INTEGER NOT NULL,
+            price_rupees INTEGER NOT NULL,
+            city TEXT NOT NULL,
+            fuel_type TEXT,
+            transmission TEXT,
+            condition TEXT,
+            description TEXT,
+            photos TEXT DEFAULT '[]',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    marketplace_columns = {
+        column["name"]
+        for column in marketplace_connection.execute(
+            "PRAGMA table_info(car_listings)"
+        ).fetchall()
+    }
+    if "photos" not in marketplace_columns:
+        marketplace_connection.execute(
+            "ALTER TABLE car_listings ADD COLUMN photos TEXT DEFAULT '[]'"
+        )
+    marketplace_connection.commit()
+    marketplace_connection.close()
 
     print("User database initialized successfully.")
 
@@ -1153,6 +1198,10 @@ def register():
             ""
         )
 
+        role = request.form.get("role", "buyer")
+        if role not in {"buyer", "seller", "both"}:
+            role = "buyer"
+
         if not username or not email or not password:
             flash(
                 "Please fill in all fields.",
@@ -1206,14 +1255,16 @@ def register():
             (
                 username,
                 email,
-                password_hash
+                password_hash,
+                role
             )
-            VALUES (?, ?, ?)
+            VALUES (?, ?, ?, ?)
             """,
             (
                 username,
                 email,
-                password_hash
+                password_hash,
+                role
             )
         )
 
@@ -1298,6 +1349,7 @@ def login():
         session["user_id"] = user["id"]
         session["username"] = user["username"]
         session["email"] = user["email"]
+        session["role"] = user["role"]
 
         return redirect(
             url_for("home")
@@ -1423,6 +1475,187 @@ def home():
     return render_template(
         "index.html"
     )
+
+# ============================================================
+# 18.1 BUY & SELL MARKETPLACE
+# ============================================================
+
+def validate_listing(payload):
+    if not isinstance(payload, dict):
+        raise ValueError("Please submit a valid listing.")
+
+    text_fields = {
+        "seller_name": ("Seller name", 80, True),
+        "seller_email": ("Email address", 120, False),
+        "seller_phone": ("Phone number", 30, False),
+        "make": ("Car make", 80, True),
+        "model": ("Car model", 80, True),
+        "city": ("City", 80, True),
+        "fuel_type": ("Fuel type", 40, False),
+        "transmission": ("Transmission", 40, False),
+        "condition": ("Condition", 40, False),
+        "description": ("Description", 1000, False),
+    }
+    listing = {}
+    for field, (label, limit, required) in text_fields.items():
+        value = payload.get(field)
+        value = value.strip() if isinstance(value, str) else ""
+        if required and not value:
+            raise ValueError(f"{label} is required.")
+        if len(value) > limit:
+            raise ValueError(f"{label} must be {limit} characters or fewer.")
+        listing[field] = value or None
+
+    if listing["seller_email"] and not re.fullmatch(
+        r"[^@\s]+@[^@\s]+\.[^@\s]+", listing["seller_email"]
+    ):
+        raise ValueError("Enter a valid email address.")
+
+    phone = listing["seller_phone"]
+    if phone and (
+        not re.fullmatch(r"[\d+\-() ]{7,30}", phone)
+        or sum(character.isdigit() for character in phone) < 7
+    ):
+        raise ValueError("Enter a valid phone number.")
+    if not listing["seller_email"] and not phone:
+        raise ValueError("Add an email address or phone number so buyers can reach you.")
+
+    for field, label in (
+        ("year", "Manufacturing year"),
+        ("kilometers", "Kilometers driven"),
+        ("price_rupees", "Asking price"),
+    ):
+        raw_value = "" if payload.get(field) is None else str(payload.get(field)).strip()
+        if isinstance(payload.get(field), bool) or not re.fullmatch(r"\d+", raw_value):
+            raise ValueError(f"{label} must be a whole number.")
+        listing[field] = int(raw_value)
+
+    if not 1950 <= listing["year"] <= 2100:
+        raise ValueError("Manufacturing year must be between 1950 and 2100.")
+    if not 0 <= listing["kilometers"] <= 5000000:
+        raise ValueError("Kilometers driven must be between 0 and 5,000,000.")
+    if not 1 <= listing["price_rupees"] <= 1000000000:
+        raise ValueError("Asking price is outside the allowed range.")
+    return listing
+
+
+ALLOWED_CAR_PHOTO_EXTENSIONS = {"jpg", "jpeg", "png", "webp", "gif"}
+MAX_CAR_PHOTO_SIZE = 5 * 1024 * 1024
+
+
+def parse_listing_photos(photo_json):
+    try:
+        photos = json.loads(photo_json or "[]")
+    except (TypeError, json.JSONDecodeError):
+        return []
+    return photos if isinstance(photos, list) else []
+
+
+def save_listing_photos(files):
+    if len(files) > 5:
+        raise ValueError("Upload no more than 5 photos.")
+
+    saved_files = []
+    try:
+        for file in files:
+            if not file or not file.filename:
+                continue
+
+            extension = secure_filename(file.filename).rsplit(".", 1)[-1].lower()
+            if extension not in ALLOWED_CAR_PHOTO_EXTENSIONS:
+                raise ValueError("Photos must be JPG, PNG, WEBP, or GIF files.")
+
+            content = file.read(MAX_CAR_PHOTO_SIZE + 1)
+            if len(content) > MAX_CAR_PHOTO_SIZE:
+                raise ValueError("Each photo must be 5 MB or smaller.")
+
+            signature_is_valid = (
+                content.startswith(b"\xff\xd8\xff") and extension in {"jpg", "jpeg"}
+            ) or (
+                content.startswith(b"\x89PNG\r\n\x1a\n") and extension == "png"
+            ) or (
+                content.startswith(b"RIFF") and content[8:12] == b"WEBP" and extension == "webp"
+            ) or (
+                content.startswith((b"GIF87a", b"GIF89a")) and extension == "gif"
+            )
+            if not signature_is_valid:
+                raise ValueError("One of the uploaded files is not a valid image.")
+
+            filename = f"{uuid.uuid4().hex}.{extension}"
+            (MARKETPLACE_UPLOAD_DIR / filename).write_bytes(content)
+            saved_files.append(filename)
+    except ValueError:
+        for filename in saved_files:
+            (MARKETPLACE_UPLOAD_DIR / filename).unlink(missing_ok=True)
+        raise
+
+    return saved_files
+
+
+@app.route("/uploads/marketplace/<path:filename>")
+def marketplace_photo(filename):
+    return send_from_directory(str(MARKETPLACE_UPLOAD_DIR), filename)
+
+
+@app.route("/marketplace")
+@login_required
+def marketplace():
+    return render_template("marketplace.html")
+
+
+@app.route("/api/listings", methods=["GET", "POST"])
+@login_required
+def listings():
+    connection = sqlite3.connect(str(MARKETPLACE_DATABASE_FILE))
+    connection.row_factory = sqlite3.Row
+    saved_photo_files = []
+    try:
+        if request.method == "GET":
+            rows = connection.execute(
+                "SELECT * FROM car_listings ORDER BY id DESC"
+            ).fetchall()
+            result = [dict(row) for row in rows]
+            for listing in result:
+                listing["photos"] = parse_listing_photos(listing.get("photos"))
+            return jsonify({
+                "success": True,
+                "listings": result
+            })
+
+        payload = request.form.to_dict() if request.form else request.get_json(silent=True)
+        listing = validate_listing(payload)
+        uploaded_files = save_listing_photos(request.files.getlist("photos"))
+        saved_photo_files = uploaded_files
+        listing["photos"] = json.dumps(uploaded_files)
+        fields = (
+            "seller_name", "seller_email", "seller_phone", "make", "model",
+            "year", "kilometers", "price_rupees", "city", "fuel_type",
+            "transmission", "condition", "description", "photos",
+        )
+        cursor = connection.execute(
+            f"INSERT INTO car_listings ({', '.join(fields)}) "
+            f"VALUES ({', '.join('?' for _ in fields)})",
+            tuple(listing[field] for field in fields),
+        )
+        connection.commit()
+        row = connection.execute(
+            "SELECT * FROM car_listings WHERE id = ?", (cursor.lastrowid,)
+        ).fetchone()
+        result = dict(row)
+        result["photos"] = parse_listing_photos(result.get("photos"))
+        return jsonify({"success": True, "listing": result}), 201
+    except ValueError as error:
+        for filename in saved_photo_files:
+            (MARKETPLACE_UPLOAD_DIR / filename).unlink(missing_ok=True)
+        return jsonify({"success": False, "error": str(error)}), 400
+    except sqlite3.Error:
+        connection.rollback()
+        for filename in saved_photo_files:
+            (MARKETPLACE_UPLOAD_DIR / filename).unlink(missing_ok=True)
+        app.logger.exception("Could not access marketplace listings")
+        return jsonify({"success": False, "error": "Could not save or load listings."}), 500
+    finally:
+        connection.close()
 
 # ============================================================
 # 19. GET WEBSITE OPTIONS
